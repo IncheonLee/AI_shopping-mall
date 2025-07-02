@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; }
+    .main-text { font-size: 28px; }
+    .sub-text { font-size: 14px; }
+  </style>
+  <rect x="10" y="10" width="40" height="40" rx="8" fill="#4A90E2"/>
+  <path d="M20 30 L30 20 L40 30 L35 40 L25 40 Z" fill="#FFFFFF"/>
+  <text x="60" y="35" class="logo-text main-text" fill="#333333">ShopAI</text>
+  <text x="60" y="50" class="logo-text sub-text" fill="#666666">Smart Shopping</text>
+</svg> 
