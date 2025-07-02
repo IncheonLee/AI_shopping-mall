@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - 쇼핑몰</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .register-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .register-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .register-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .register-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .register-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-grey-color);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: var(--grey-color);
+            margin-top: 5px;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .terms-checkbox input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .terms-checkbox label {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        .terms-checkbox a {
+            color: var(--primary-color);
+        }
+        
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-register:hover {
+            background-color: #303f9f;
+        }
+        
+        .social-register {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-register p {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .social-register p::before,
+        .social-register p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: var(--light-grey-color);
+        }
+        
+        .social-register p::before {
+            left: 0;
+        }
+        
+        .social-register p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid var(--light-grey-color);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-button.facebook {
+            color: #3b5998;
+        }
+        
+        .social-button.google {
+            color: #db4437;
+        }
+        
+        .social-button.kakao {
+            color: #3c1e1e;
+            background-color: #fee500;
+            border-color: #fee500;
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .login-link {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <h1>쇼핑몰</h1>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="검색어를 입력하세요...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <a href="login.html" class="btn-login">로그인</a>
+                    <a href="register.html" class="btn-register">회원가입</a>
+                    <a href="cart.html" class="btn-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../../index.html">홈</a></li>
+                    <li><a href="products.html?category=all">전체상품</a></li>
+                    <li><a href="products.html?category=new">신상품</a></li>
+                    <li><a href="products.html?category=best">베스트</a></li>
+                    <li><a href="products.html?category=sale">할인상품</a></li>
+                    <li><a href="customer-service.html">고객센터</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="register-container">
+                <div class="register-header">
+                    <h1>회원가입</h1>
+                    <p>쇼핑몰의 회원이 되어 다양한 혜택을 누려보세요</p>
+                </div>
+                
+                <form class="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">이름</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="이름을 입력하세요" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">성</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="성을 입력하세요" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" name="email" placeholder="이메일 주소를 입력하세요" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">전화번호</label>
+                        <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력하세요 (예: 010-1234-5678)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                        <p class="password-requirements">비밀번호는 8자 이상이며, 영문 대소문자, 숫자, 특수문자를 포함해야 합니다.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">비밀번호 확인</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호를 다시 입력하세요" required>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="termsAgree" name="termsAgree" required>
+                        <label for="termsAgree">
+                            <a href="terms.html" target="_blank">이용약관</a> 및 <a href="privacy.html" target="_blank">개인정보처리방침</a>에 동의합니다.
+                        </label>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="marketingAgree" name="marketingAgree">
+                        <label for="marketingAgree">
+                            마케팅 정보 수신에 동의합니다. (선택)
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-register">회원가입</button>
+                </form>
+                
+                <div class="social-register">
+                    <p>또는</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-button facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-button google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-button kakao">
+                            <i class="fas fa-comment"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="login-link">
+                    <p>이미 계정이 있으신가요? <a href="login.html">로그인</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>쇼핑몰</h3>
+                    <p>최고의 제품을 합리적인 가격으로 제공하는 온라인 쇼핑몰입니다.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>쇼핑하기</h3>
+                    <ul>
+                        <li><a href="products.html?category=new">신상품</a></li>
+                        <li><a href="products.html?category=best">베스트 상품</a></li>
+                        <li><a href="products.html?category=sale">할인 상품</a></li>
+                        <li><a href="products.html?category=all">전체 상품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>고객 서비스</h3>
+                    <ul>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="faq.html">자주 묻는 질문</a></li>
+                        <li><a href="shipping.html">배송 정보</a></li>
+                        <li><a href="returns.html">교환 및 반품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>내 계정</h3>
+                    <ul>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="register.html">회원가입</a></li>
+                        <li><a href="orders.html">주문 조회</a></li>
+                        <li><a href="wishlist.html">위시리스트</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 쇼핑몰. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">개인정보처리방침</a>
+                    <a href="terms.html">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.querySelector('.register-form');
+            
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // 폼 데이터 수집
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    const termsAgree = document.getElementById('termsAgree').checked;
+                    const marketingAgree = document.getElementById('marketingAgree').checked;
+                    
+                    // 비밀번호 유효성 검사
+                    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                    
+                    if (!passwordRegex.test(password)) {
+                        showToast('비밀번호는 8자 이상이며, 영문 대소문자, 숫자, 특수문자를 포함해야 합니다.');
+                        return;
+                    }
+                    
+                    // 비밀번호 확인 일치 여부
+                    if (password !== confirmPassword) {
+                        showToast('비밀번호가 일치하지 않습니다.');
+                        return;
+                    }
+                    
+                    // 이용약관 동의 여부
+                    if (!termsAgree) {
+                        showToast('이용약관 및 개인정보처리방침에 동의해주세요.');
+                        return;
+                    }
+                    
+                    // 회원가입 성공 시뮬레이션
+                    // 실제 구현에서는 서버로 데이터를 전송하여 처리해야 함
+                    const userData = {
+                        firstName,
+                        lastName,
+                        email,
+                        phone,
+                        marketingAgree
+                    };
+                    
+                    // 로컬 스토리지에 사용자 데이터 저장
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+                    
+                    showToast('회원가입이 완료되었습니다. 환영합니다!');
+                    
+                    // 홈페이지로 리디렉션
+                    setTimeout(() => {
+                        window.location.href = '../../index.html';
+                    }, 2000);
+                });
+            }
+            
+            // 소셜 회원가입 버튼
+            const socialButtons = document.querySelectorAll('.social-button');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showToast('소셜 회원가입 기능은 현재 준비 중입니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
