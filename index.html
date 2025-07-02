@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑몰 - 최고의 온라인 쇼핑 경험</title>
+    <link rel="stylesheet" href="src/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>쇼핑몰</h1>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="검색어를 입력하세요...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <a href="src/pages/login.html" class="btn-login">로그인</a>
+                    <a href="src/pages/register.html" class="btn-register">회원가입</a>
+                    <a href="src/pages/cart.html" class="btn-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="src/pages/products.html?category=all">전체상품</a></li>
+                    <li><a href="src/pages/products.html?category=new">신상품</a></li>
+                    <li><a href="src/pages/products.html?category=best">베스트</a></li>
+                    <li><a href="src/pages/products.html?category=sale">할인상품</a></li>
+                    <li><a href="src/pages/customer-service.html">고객센터</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-slider">
+                <div class="slide active">
+                    <img src="src/assets/images/banner1.jpg" alt="메인 배너 1">
+                    <div class="slide-content">
+                        <h2>여름 신상품 컬렉션</h2>
+                        <p>최대 30% 할인된 가격으로 만나보세요</p>
+                        <a href="src/pages/products.html?category=summer" class="btn-shop-now">지금 쇼핑하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-categories">
+        <div class="container">
+            <h2 class="section-title">인기 카테고리</h2>
+            <div class="category-grid">
+                <a href="src/pages/products.html?category=clothing" class="category-item">
+                    <img src="src/assets/images/category-clothing.jpg" alt="의류">
+                    <h3>의류</h3>
+                </a>
+                <a href="src/pages/products.html?category=electronics" class="category-item">
+                    <img src="src/assets/images/category-electronics.jpg" alt="전자제품">
+                    <h3>전자제품</h3>
+                </a>
+                <a href="src/pages/products.html?category=home" class="category-item">
+                    <img src="src/assets/images/category-home.jpg" alt="홈/리빙">
+                    <h3>홈/리빙</h3>
+                </a>
+                <a href="src/pages/products.html?category=beauty" class="category-item">
+                    <img src="src/assets/images/category-beauty.jpg" alt="뷰티">
+                    <h3>뷰티</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">인기 상품</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-badge">베스트</div>
+                    <div class="product-image">
+                        <img src="src/assets/images/product1.jpg" alt="제품 1">
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-product-id="1"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="add-to-wishlist" data-product-id="1"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">프리미엄 티셔츠</h3>
+                        <div class="product-price">
+                            <span class="current-price">29,000원</span>
+                            <span class="original-price">35,000원</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(120)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">신상품</div>
+                    <div class="product-image">
+                        <img src="src/assets/images/product2.jpg" alt="제품 2">
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-product-id="2"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="add-to-wishlist" data-product-id="2"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">스마트 워치</h3>
+                        <div class="product-price">
+                            <span class="current-price">89,000원</span>
+                            <span class="original-price">120,000원</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(85)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="src/assets/images/product3.jpg" alt="제품 3">
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-product-id="3"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="add-to-wishlist" data-product-id="3"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">가정용 블렌더</h3>
+                        <div class="product-price">
+                            <span class="current-price">45,000원</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(210)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">할인</div>
+                    <div class="product-image">
+                        <img src="src/assets/images/product4.jpg" alt="제품 4">
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-product-id="4"><i class="fas fa-shopping-cart"></i></button>
+                            <button class="add-to-wishlist" data-product-id="4"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">무선 이어폰</h3>
+                        <div class="product-price">
+                            <span class="current-price">79,000원</span>
+                            <span class="original-price">99,000원</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                            <span>(65)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <a href="src/pages/products.html?category=featured" class="btn-view-more">더 많은 상품 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="special-offers">
+        <div class="container">
+            <div class="offer-banner">
+                <div class="offer-content">
+                    <h2>여름 맞이 특별 할인</h2>
+                    <p>전 상품 최대 50% 할인!</p>
+                    <p class="offer-period">7월 1일 ~ 7월 15일까지</p>
+                    <a href="src/pages/products.html?category=sale" class="btn-shop-now">할인 상품 보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">고객 후기</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"정말 좋은 품질의 제품을 합리적인 가격에 구매할 수 있어서 매우 만족합니다. 배송도 빠르고 포장도 꼼꼼하게 잘 되어 있었어요!"</p>
+                        <div class="testimonial-author">
+                            <img src="src/assets/images/customer1.jpg" alt="고객 1">
+                            <div class="author-info">
+                                <h4>김지민</h4>
+                                <p>서울시</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>뉴스레터 구독하기</h2>
+                <p>최신 제품 소식과 특별 할인 정보를 이메일로 받아보세요!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="이메일 주소를 입력하세요" required>
+                    <button type="submit" class="btn-subscribe">구독하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>쇼핑몰</h3>
+                    <p>최고의 제품을 합리적인 가격으로 제공하는 온라인 쇼핑몰입니다.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>쇼핑하기</h3>
+                    <ul>
+                        <li><a href="src/pages/products.html?category=new">신상품</a></li>
+                        <li><a href="src/pages/products.html?category=best">베스트 상품</a></li>
+                        <li><a href="src/pages/products.html?category=sale">할인 상품</a></li>
+                        <li><a href="src/pages/products.html?category=all">전체 상품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>고객 서비스</h3>
+                    <ul>
+                        <li><a href="src/pages/contact.html">문의하기</a></li>
+                        <li><a href="src/pages/faq.html">자주 묻는 질문</a></li>
+                        <li><a href="src/pages/shipping.html">배송 정보</a></li>
+                        <li><a href="src/pages/returns.html">교환 및 반품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>내 계정</h3>
+                    <ul>
+                        <li><a href="src/pages/login.html">로그인</a></li>
+                        <li><a href="src/pages/register.html">회원가입</a></li>
+                        <li><a href="src/pages/orders.html">주문 조회</a></li>
+                        <li><a href="src/pages/wishlist.html">위시리스트</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 쇼핑몰. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="src/pages/privacy.html">개인정보처리방침</a>
+                    <a href="src/pages/terms.html">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/assets/js/script.js"></script>
+</body>
+</html> 

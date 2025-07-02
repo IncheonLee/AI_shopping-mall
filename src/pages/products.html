@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록 - 쇼핑몰</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .products-container {
+            padding: 60px 0;
+        }
+        
+        .products-header {
+            margin-bottom: 30px;
+        }
+        
+        .products-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .breadcrumb {
+            display: flex;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            color: var(--grey-color);
+        }
+        
+        .breadcrumb span {
+            margin: 0 8px;
+            color: var(--grey-color);
+        }
+        
+        .products-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-grey-color);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .filter-dropdown {
+            position: relative;
+        }
+        
+        .filter-dropdown select {
+            padding: 8px 30px 8px 15px;
+            border: 1px solid var(--light-grey-color);
+            border-radius: var(--border-radius);
+            background-color: white;
+            font-size: 14px;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .filter-dropdown::after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .view-option {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--light-grey-color);
+            border-radius: var(--border-radius);
+            color: var(--grey-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .view-option.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .products-list {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .product-list-item {
+            display: flex;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .product-list-image {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .product-list-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-list-info {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-list-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .product-list-description {
+            font-size: 14px;
+            color: var(--grey-color);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .product-list-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-list-price {
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-list-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination-item {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--light-grey-color);
+            margin: 0 5px;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .pagination-item:hover,
+        .pagination-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .pagination-item.disabled {
+            color: var(--light-grey-color);
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-filters {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .product-list-item {
+                flex-direction: column;
+            }
+            
+            .product-list-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-options {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <h1>쇼핑몰</h1>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="검색어를 입력하세요...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <a href="login.html" class="btn-login">로그인</a>
+                    <a href="register.html" class="btn-register">회원가입</a>
+                    <a href="cart.html" class="btn-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../../index.html">홈</a></li>
+                    <li><a href="products.html?category=all">전체상품</a></li>
+                    <li><a href="products.html?category=new">신상품</a></li>
+                    <li><a href="products.html?category=best">베스트</a></li>
+                    <li><a href="products.html?category=sale">할인상품</a></li>
+                    <li><a href="customer-service.html">고객센터</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="products-container">
+                <div class="products-header">
+                    <div class="breadcrumb">
+                        <a href="../../index.html">홈</a>
+                        <span>/</span>
+                        <a href="products.html?category=all">전체상품</a>
+                    </div>
+                    <h1 id="category-title">전체상품</h1>
+                </div>
+                
+                <div class="products-filters">
+                    <div class="filter-options">
+                        <div class="filter-dropdown">
+                            <select id="sort-by">
+                                <option value="newest">최신순</option>
+                                <option value="price-low">가격 낮은순</option>
+                                <option value="price-high">가격 높은순</option>
+                                <option value="popular">인기순</option>
+                                <option value="rating">평점순</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-dropdown">
+                            <select id="filter-price">
+                                <option value="all">모든 가격대</option>
+                                <option value="under-30000">30,000원 이하</option>
+                                <option value="30000-50000">30,000원 ~ 50,000원</option>
+                                <option value="50000-100000">50,000원 ~ 100,000원</option>
+                                <option value="over-100000">100,000원 이상</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="view-options">
+                        <div class="view-option active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </div>
+                        <div class="view-option" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="products-container">
+                    <!-- 상품 카드는 JavaScript로 동적 생성 -->
+                </div>
+                
+                <div class="products-list" id="products-list-container">
+                    <!-- 상품 리스트는 JavaScript로 동적 생성 -->
+                </div>
+                
+                <div class="pagination">
+                    <a href="#" class="pagination-item disabled">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                    <a href="#" class="pagination-item active">1</a>
+                    <a href="#" class="pagination-item">2</a>
+                    <a href="#" class="pagination-item">3</a>
+                    <a href="#" class="pagination-item">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>쇼핑몰</h3>
+                    <p>최고의 제품을 합리적인 가격으로 제공하는 온라인 쇼핑몰입니다.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>쇼핑하기</h3>
+                    <ul>
+                        <li><a href="products.html?category=new">신상품</a></li>
+                        <li><a href="products.html?category=best">베스트 상품</a></li>
+                        <li><a href="products.html?category=sale">할인 상품</a></li>
+                        <li><a href="products.html?category=all">전체 상품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>고객 서비스</h3>
+                    <ul>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="faq.html">자주 묻는 질문</a></li>
+                        <li><a href="shipping.html">배송 정보</a></li>
+                        <li><a href="returns.html">교환 및 반품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>내 계정</h3>
+                    <ul>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="register.html">회원가입</a></li>
+                        <li><a href="orders.html">주문 조회</a></li>
+                        <li><a href="wishlist.html">위시리스트</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 쇼핑몰. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">개인정보처리방침</a>
+                    <a href="terms.html">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL에서 카테고리 파라미터 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            
+            // 카테고리 타이틀 업데이트
+            const categoryTitle = document.getElementById('category-title');
+            const breadcrumbCategory = document.querySelector('.breadcrumb a:last-child');
+            
+            let categoryName = '전체상품';
+            switch(category) {
+                case 'new':
+                    categoryName = '신상품';
+                    break;
+                case 'best':
+                    categoryName = '베스트';
+                    break;
+                case 'sale':
+                    categoryName = '할인상품';
+                    break;
+                case 'clothing':
+                    categoryName = '의류';
+                    break;
+                case 'electronics':
+                    categoryName = '전자제품';
+                    break;
+                case 'home':
+                    categoryName = '홈/리빙';
+                    break;
+                case 'beauty':
+                    categoryName = '뷰티';
+                    break;
+                default:
+                    categoryName = '전체상품';
+            }
+            
+            categoryTitle.textContent = categoryName;
+            breadcrumbCategory.textContent = categoryName;
+            breadcrumbCategory.href = `products.html?category=${category}`;
+            
+            // 상품 데이터 (실제로는 서버에서 가져와야 함)
+            const products = [
+                {
+                    id: 1,
+                    name: '프리미엄 티셔츠',
+                    image: '../assets/images/product1.jpg',
+                    currentPrice: 29000,
+                    originalPrice: 35000,
+                    rating: 4.5,
+                    reviewCount: 120,
+                    badge: '베스트',
+                    category: ['clothing', 'best'],
+                    description: '고품질 면 소재로 제작된 편안한 착용감의 프리미엄 티셔츠입니다.'
+                },
+                {
+                    id: 2,
+                    name: '스마트 워치',
+                    image: '../assets/images/product2.jpg',
+                    currentPrice: 89000,
+                    originalPrice: 120000,
+                    rating: 4,
+                    reviewCount: 85,
+                    badge: '신상품',
+                    category: ['electronics', 'new'],
+                    description: '다양한 기능을 갖춘 스마트 워치로 건강 관리와 스마트 생활을 경험하세요.'
+                },
+                {
+                    id: 3,
+                    name: '가정용 블렌더',
+                    image: '../assets/images/product3.jpg',
+                    currentPrice: 45000,
+                    originalPrice: null,
+                    rating: 5,
+                    reviewCount: 210,
+                    badge: null,
+                    category: ['home', 'best'],
+                    description: '강력한 모터와 내구성 있는 블레이드로 어떤 재료든 손쉽게 갈아냅니다.'
+                },
+                {
+                    id: 4,
+                    name: '무선 이어폰',
+                    image: '../assets/images/product4.jpg',
+                    currentPrice: 79000,
+                    originalPrice: 99000,
+                    rating: 3.5,
+                    reviewCount: 65,
+                    badge: '할인',
+                    category: ['electronics', 'sale'],
+                    description: '뛰어난 음질과 긴 배터리 수명을 자랑하는 프리미엄 무선 이어폰입니다.'
+                },
+                {
+                    id: 5,
+                    name: '슬림핏 청바지',
+                    image: '../assets/images/product5.jpg',
+                    currentPrice: 49000,
+                    originalPrice: 65000,
+                    rating: 4,
+                    reviewCount: 95,
+                    badge: '할인',
+                    category: ['clothing', 'sale'],
+                    description: '편안한 착용감과 세련된 디자인의 슬림핏 청바지입니다.'
+                },
+                {
+                    id: 6,
+                    name: '스킨케어 세트',
+                    image: '../assets/images/product6.jpg',
+                    currentPrice: 58000,
+                    originalPrice: null,
+                    rating: 4.5,
+                    reviewCount: 150,
+                    badge: '신상품',
+                    category: ['beauty', 'new'],
+                    description: '자연 성분으로 만든 스킨케어 세트로 건강한 피부를 유지하세요.'
+                },
+                {
+                    id: 7,
+                    name: '홈 오피스 책상',
+                    image: '../assets/images/product7.jpg',
+                    currentPrice: 120000,
+                    originalPrice: 150000,
+                    rating: 4,
+                    reviewCount: 75,
+                    badge: '할인',
+                    category: ['home', 'sale'],
+                    description: '넓은 작업 공간과 수납 기능을 갖춘 현대적인 디자인의 홈 오피스 책상입니다.'
+                },
+                {
+                    id: 8,
+                    name: '무선 키보드',
+                    image: '../assets/images/product8.jpg',
+                    currentPrice: 35000,
+                    originalPrice: null,
+                    rating: 4,
+                    reviewCount: 60,
+                    badge: null,
+                    category: ['electronics'],
+                    description: '인체공학적 디자인과 조용한 타이핑을 제공하는 무선 키보드입니다.'
+                }
+            ];
+            
+            // 카테고리별 상품 필터링
+            let filteredProducts = products;
+            if (category !== 'all') {
+                filteredProducts = products.filter(product => product.category.includes(category));
+            }
+            
+            // 상품 정렬 기능
+            const sortBySelect = document.getElementById('sort-by');
+            sortBySelect.addEventListener('change', function() {
+                const sortValue = this.value;
+                sortProducts(sortValue);
+            });
+            
+            function sortProducts(sortValue) {
+                switch(sortValue) {
+                    case 'price-low':
+                        filteredProducts.sort((a, b) => a.currentPrice - b.currentPrice);
+                        break;
+                    case 'price-high':
+                        filteredProducts.sort((a, b) => b.currentPrice - a.currentPrice);
+                        break;
+                    case 'popular':
+                        filteredProducts.sort((a, b) => b.reviewCount - a.reviewCount);
+                        break;
+                    case 'rating':
+                        filteredProducts.sort((a, b) => b.rating - a.rating);
+                        break;
+                    default:
+                        // 최신순 (ID 기준 역순)
+                        filteredProducts.sort((a, b) => b.id - a.id);
+                }
+                
+                renderProducts();
+            }
+            
+            // 가격 필터링 기능
+            const filterPriceSelect = document.getElementById('filter-price');
+            filterPriceSelect.addEventListener('change', function() {
+                const filterValue = this.value;
+                
+                if (category !== 'all') {
+                    filteredProducts = products.filter(product => product.category.includes(category));
+                } else {
+                    filteredProducts = [...products];
+                }
+                
+                if (filterValue !== 'all') {
+                    switch(filterValue) {
+                        case 'under-30000':
+                            filteredProducts = filteredProducts.filter(product => product.currentPrice < 30000);
+                            break;
+                        case '30000-50000':
+                            filteredProducts = filteredProducts.filter(product => product.currentPrice >= 30000 && product.currentPrice <= 50000);
+                            break;
+                        case '50000-100000':
+                            filteredProducts = filteredProducts.filter(product => product.currentPrice > 50000 && product.currentPrice <= 100000);
+                            break;
+                        case 'over-100000':
+                            filteredProducts = filteredProducts.filter(product => product.currentPrice > 100000);
+                            break;
+                    }
+                }
+                
+                renderProducts();
+            });
+            
+            // 보기 방식 전환 기능
+            const viewOptions = document.querySelectorAll('.view-option');
+            const productsGrid = document.getElementById('products-container');
+            const productsList = document.getElementById('products-list-container');
+            
+            viewOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const viewType = this.getAttribute('data-view');
+                    
+                    viewOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (viewType === 'grid') {
+                        productsGrid.style.display = 'grid';
+                        productsList.style.display = 'none';
+                    } else {
+                        productsGrid.style.display = 'none';
+                        productsList.style.display = 'flex';
+                    }
+                });
+            });
+            
+            // 상품 렌더링 함수
+            function renderProducts() {
+                const productsContainer = document.getElementById('products-container');
+                const productsListContainer = document.getElementById('products-list-container');
+                
+                productsContainer.innerHTML = '';
+                productsListContainer.innerHTML = '';
+                
+                filteredProducts.forEach(product => {
+                    // 그리드 뷰용 상품 카드
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    let badgeHTML = '';
+                    if (product.badge) {
+                        badgeHTML = `<div class="product-badge">${product.badge}</div>`;
+                    }
+                    
+                    let originalPriceHTML = '';
+                    if (product.originalPrice) {
+                        originalPriceHTML = `<span class="original-price">${product.originalPrice.toLocaleString()}원</span>`;
+                    }
+                    
+                    const stars = getStarRating(product.rating);
+                    
+                    productCard.innerHTML = `
+                        ${badgeHTML}
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-actions">
+                                <button class="add-to-cart" data-product-id="${product.id}"><i class="fas fa-shopping-cart"></i></button>
+                                <button class="add-to-wishlist" data-product-id="${product.id}"><i class="fas fa-heart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-price">
+                                <span class="current-price">${product.currentPrice.toLocaleString()}원</span>
+                                ${originalPriceHTML}
+                            </div>
+                            <div class="product-rating">
+                                ${stars}
+                                <span>(${product.reviewCount})</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productsContainer.appendChild(productCard);
+                    
+                    // 리스트 뷰용 상품 아이템
+                    const productListItem = document.createElement('div');
+                    productListItem.className = 'product-list-item';
+                    
+                    productListItem.innerHTML = `
+                        <div class="product-list-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-list-info">
+                            <h3 class="product-list-name">${product.name}</h3>
+                            <p class="product-list-description">${product.description}</p>
+                            <div class="product-list-bottom">
+                                <div class="product-list-price">
+                                    <span class="current-price">${product.currentPrice.toLocaleString()}원</span>
+                                    ${originalPriceHTML}
+                                </div>
+                                <div class="product-list-actions">
+                                    <button class="add-to-cart" data-product-id="${product.id}"><i class="fas fa-shopping-cart"></i></button>
+                                    <button class="add-to-wishlist" data-product-id="${product.id}"><i class="fas fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    productsListContainer.appendChild(productListItem);
+                });
+                
+                // 장바구니 기능 초기화
+                initCartFunctionality();
+            }
+            
+            // 별점 HTML 생성 함수
+            function getStarRating(rating) {
+                let stars = '';
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                
+                for (let i = 0; i < fullStars; i++) {
+                    stars += '<i class="fas fa-star"></i>';
+                }
+                
+                if (halfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                }
+                
+                for (let i = 0; i < emptyStars; i++) {
+                    stars += '<i class="far fa-star"></i>';
+                }
+                
+                return stars;
+            }
+            
+            // 페이지네이션 기능
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            paginationItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (this.classList.contains('disabled')) {
+                        return;
+                    }
+                    
+                    paginationItems.forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 실제로는 해당 페이지의 상품을 불러와야 함
+                    // 여기서는 간단히 페이지 번호만 표시
+                });
+            });
+            
+            // 초기 상품 렌더링
+            renderProducts();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - 쇼핑몰</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-grey-color);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+        }
+        
+        .login-form .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 5px;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+        
+        .login-form .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .login-form .btn-login:hover {
+            background-color: #303f9f;
+        }
+        
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-login p {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: var(--light-grey-color);
+        }
+        
+        .social-login p::before {
+            left: 0;
+        }
+        
+        .social-login p::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid var(--light-grey-color);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-button.facebook {
+            color: #3b5998;
+        }
+        
+        .social-button.google {
+            color: #db4437;
+        }
+        
+        .social-button.kakao {
+            color: #3c1e1e;
+            background-color: #fee500;
+            border-color: #fee500;
+        }
+        
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .register-link {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .register-link a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <h1>쇼핑몰</h1>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="검색어를 입력하세요...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="header-actions">
+                    <a href="login.html" class="btn-login">로그인</a>
+                    <a href="register.html" class="btn-register">회원가입</a>
+                    <a href="cart.html" class="btn-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../../index.html">홈</a></li>
+                    <li><a href="products.html?category=all">전체상품</a></li>
+                    <li><a href="products.html?category=new">신상품</a></li>
+                    <li><a href="products.html?category=best">베스트</a></li>
+                    <li><a href="products.html?category=sale">할인상품</a></li>
+                    <li><a href="customer-service.html">고객센터</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="login-container">
+                <div class="login-header">
+                    <h1>로그인</h1>
+                    <p>쇼핑몰에 오신 것을 환영합니다</p>
+                </div>
+                
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" name="email" placeholder="이메일 주소를 입력하세요" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                        <a href="forgot-password.html" class="forgot-password">비밀번호를 잊으셨나요?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">로그인</button>
+                </form>
+                
+                <div class="social-login">
+                    <p>또는</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-button facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-button google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-button kakao">
+                            <i class="fas fa-comment"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="register-link">
+                    <p>계정이 없으신가요? <a href="register.html">회원가입</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>쇼핑몰</h3>
+                    <p>최고의 제품을 합리적인 가격으로 제공하는 온라인 쇼핑몰입니다.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>쇼핑하기</h3>
+                    <ul>
+                        <li><a href="products.html?category=new">신상품</a></li>
+                        <li><a href="products.html?category=best">베스트 상품</a></li>
+                        <li><a href="products.html?category=sale">할인 상품</a></li>
+                        <li><a href="products.html?category=all">전체 상품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>고객 서비스</h3>
+                    <ul>
+                        <li><a href="contact.html">문의하기</a></li>
+                        <li><a href="faq.html">자주 묻는 질문</a></li>
+                        <li><a href="shipping.html">배송 정보</a></li>
+                        <li><a href="returns.html">교환 및 반품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>내 계정</h3>
+                    <ul>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="register.html">회원가입</a></li>
+                        <li><a href="orders.html">주문 조회</a></li>
+                        <li><a href="wishlist.html">위시리스트</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 쇼핑몰. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">개인정보처리방침</a>
+                    <a href="terms.html">이용약관</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('.login-form');
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // 실제 구현에서는 서버로 데이터를 전송하여 인증해야 함
+                    // 여기서는 간단한 검증만 수행
+                    
+                    if (email && password) {
+                        // 로그인 성공 시뮬레이션
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('userEmail', email);
+                        
+                        showToast('로그인이 완료되었습니다.');
+                        
+                        // 홈페이지로 리디렉션
+                        setTimeout(() => {
+                            window.location.href = '../../index.html';
+                        }, 1500);
+                    } else {
+                        showToast('이메일과 비밀번호를 모두 입력해주세요.');
+                    }
+                });
+            }
+            
+            // 소셜 로그인 버튼
+            const socialButtons = document.querySelectorAll('.social-button');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showToast('소셜 로그인 기능은 현재 준비 중입니다.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
